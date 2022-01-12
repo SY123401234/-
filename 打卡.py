@@ -26,7 +26,6 @@ header = {
         "Cookie":cookie
             }
 
-
 begin = input("输入开始日期:") or "2021-11-30"   #默认21-11-30
 end = input("输入结束日期:") or time.strftime("%Y-%m-%d") #默认当前日期
 rjnr = input("打卡内容:")or "实习"
@@ -52,7 +51,5 @@ while b <= e:
     r = requests.post(url , headers = header , data = data)
     print (b)
     print(str(r) + r.text)
-    
-    
     b += delta
     time.sleep(2)
