@@ -26,9 +26,10 @@ header = {
         "Cookie":cookie
             }
 
+print("当前日期:" + time.strftime("%Y-%m-%d"))
 begin = input("输入开始日期:") or "2021-11-30"   #默认21-11-30
 end = input("输入结束日期:") or time.strftime("%Y-%m-%d") #默认当前日期
-rjnr = input("打卡内容:")or "实习"
+rjnr = input("打卡内容:") or "实习"
 b1 = begin.rsplit("-")
 b = datetime.date(int(b1[0]),int(b1[1]),int(b1[2]))
 e1 = end.rsplit("-")
@@ -38,7 +39,6 @@ while b <= e:
     date = b.strftime("%Y-%m-%d")
     lat += random.randint(0,4)
     lng += random.randint(0,4)
-   
     data = {
         "jb":jb,
         "date":date,
