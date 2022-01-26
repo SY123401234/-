@@ -3,23 +3,23 @@ import time
 import datetime
 import random
 
-yj = "https://v1.hitokoto.cn/?c=f&encode=text"  #随机语句API（URL）
-dknr = "实习"   #默认打卡内容
+yj = "http://v1.hitokoto.cn/?c=f&encode=text"     #随机语句API（URL）
 jb = time.strftime("%Y")
-lat = 29.607838
-lng = 106.57144
-dkwz = "重庆市江北区内环快速路"
 
 print("当前日期:" + time.strftime("%Y-%m-%d"))
-cookie = "JSESSIONID=" + input("输入jsessionid:")
-begin = input("输入开始日期:") or "2021-11-30"   #默认21-11-30
-end = input("输入结束日期:") or time.strftime("%Y-%m-%d") #默认当前日期
+cookie =input("输入cookie:")
+lat = float(input("lat=")) or 30.607838
+lng = float(input("lng=")) or 108.57144
+dkwz = input("地址:") or "重庆市江北区内环快速路"
+begin = input("输入开始日期(现在):") or time.strftime("%Y-%m-%d")   #默认当前日期
+end = input("输入结束日期:") or "2021-11-30"   #默认21-11-30
 dk = input("开启随机打卡内容（网络语句）:") or 1
 
 if dk != 1:
+    dknr = input("打卡内容:") or "实习"
     rjnr = dknr
     print("默认打卡内容：" + dknr)
-    
+
 b1 = begin.rsplit("-")
 b = datetime.date(int(b1[0]),int(b1[1]),int(b1[2]))
 e1 = end.rsplit("-")
@@ -45,13 +45,13 @@ header = {
         "Cookie":cookie
             }
 
-while b <= e:
+while b >= e:
     date = b.strftime("%Y-%m-%d")
     lat += random.randint(0,4)
     lng += random.randint(0,4)
 
     if dk == 1:
-        rjnr = requests.get(yu).text
+        rjnr = requests.get(yj).text
 
     data = {
         "jb":jb,
@@ -64,7 +64,7 @@ while b <= e:
             }
     
     r = requests.post(url , headers = header , data = data)
-    print (b + "   " + rjnr)
+    print (str(b) + "   " + rjnr)
     print(str(r) + r.text)
-    b += delta
+    b -= delta
     time.sleep(1)
